@@ -1,0 +1,99 @@
+﻿@model Model.StaffModel
+@{
+    Layout = "_Layout";
+    var title = "Create";
+    ViewData["Title"] = "Create";
+}
+<style>
+    .input-validation-error {
+        border-color: red;
+    }
+</style>
+
+<h2>@title</h2>
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<form asp-action="Create" id="CreateForm" runat="server" class="m-1 p-1" method="post">
+    <div class="form-group">
+        <label asp-for="Email" runat="server"></label>
+        <input asp-for="Email" class="form-control" placeholder="Email" id="Email" required />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="FullName" runat="Server"></label>
+        <input asp-for="FullName" type="text" class="form-control" placeholder="FullName" id="FullName" required />
+        <span asp-validation-for="FullName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="LastName" runat="Server"></label>
+        <input asp-for="LastName" type="text" class="form-control" placeholder="LastName" id="LastName" required />
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Address" runat="Server"></label>
+        <input asp-for="Address" type="text" class="form-control" placeholder="Address" id="Address" required />
+        <span asp-validation-for="Address" class="text-danger"></span>
+    </div>
+    <input type="button" id="btnSave" class="btn btn-primary" value="Submit" />
+    @**<input id="btnGetResponse" type="button"  runat="Server" value="Submit" />*@
+</form>
+
+
+
+@*<script src="/lib/jquery/dist/jquery.min.js"></script>*@
+@*<script src="/lib/jquery-validation/dist/jquery.validate.min.js"></script>*@
+@*<script src="/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script> *@
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+        //$("#Create").click(function(b){
+        //    e.preventDefault();
+        //    $('#modalcreate').modal();
+        //    $(function () {
+
+        //        $('#create-form').submit(function () {
+        //            $.ajax({
+        //                type: "POST",
+        //                url: "{{Register('Create') }}",
+        //                data: $('form.createform').serialize(),
+        //                success: function (response) {
+        //                    alert(response['response']);
+        //                },
+        //                error: function () {
+        //                    alert('Error');
+        //                }
+        //            });
+        //            return false;
+        //        });
+        //    });
+        //});
+
+
+    $(document).ready(function () {
+        $("#btnSave").click(function () {
+            var data = $("#CreateForm").serialize();
+            console.log(data);
+            $.ajax({
+                type: "POST",
+                url: "/Register/Create",
+                data: data,
+                //contentType: "application/Json;UTF-8",
+                dataType: "json",
+                success: function (data) {
+                    alert("Created success.");
+                    window.location = "https://localhost:44366/Register/Display/";
+
+
+                },
+                failure: function (data) {
+                    alert('fail to add');
+                }
+
+
+            });
+        });
+    });
+
+
+
+</script>

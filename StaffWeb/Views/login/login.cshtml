@@ -1,0 +1,59 @@
+﻿@model Model.login
+@{
+    Layout = "_Layout";
+
+
+    ViewData["Title"] = "login";
+
+}
+
+
+
+<h2>Login</h2>
+
+
+<div class="container" runat="server">
+    <div class="row">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4">
+            <div class="Card">
+                <div class="Card-decker">
+                <form class="form-horizontal" runat="server" asp-action="Login">
+                <div class="form-group">   
+                    <label class="control-label" runat="server">Email</label>
+                    <input asp-for="Username" class="form-control" type="text" placeholder="Username" required />
+                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                </div>
+                <div class="form-group"> 
+                    <label class="control-label" runat="server">Password</label>
+                    <input asp-for="Password" class="form-control" type="password" placeholder="password" required />
+                </div>
+
+
+                <div class="form-group">
+                    <input type="submit" runat="server" value="Submit" />
+                </div>
+
+                <div class="for-group">
+                    <input type="reset" runat="server" class=" btn btn-danger" value="Clean" />
+
+                </div>
+                
+                <a class="btn btn-info" asp-action="GoogleLogin">Log In With Google</a>
+            </form>
+                </div>
+                </div>
+        </div>
+        <div class="col-sm-4"></div>
+    </div>
+</div>
+@{
+    if (TempData["msg"] != null)
+    {
+        <script>
+            alert('@TempData["msg"]')
+
+        </script>
+    }
+}
+
